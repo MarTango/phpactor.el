@@ -210,7 +210,7 @@
   (let* ((input-vars (phpactor-action--collect-inputs inputs))
          (parameters (phpactor-action--fill-vars (plist-get callback :parameters) input-vars)))
     (message "%s" callback)
-    (apply #'phpactor-action-dispatch (phpactor--rpc (plist-get callback :action) parameters))))
+    (apply #'phpactor-action-dispatch (phpactor--rpc (plist-get input-vars :action) parameters))))
 
 (cl-defun phpactor-action-information (&key information details)
   "Pop information buffer from Phpactor."
@@ -339,6 +339,7 @@
 
 ;;;###autoload
 (defun phpactor-context-menu ()
+  "Execute Phpactor RPC context_menu command."
   (interactive)
   (let ((arguments (phpactor--command-argments :source :offset :current_path)))
     (apply #'phpactor-action-dispatch (phpactor--rpc "context_menu" arguments))))
