@@ -337,5 +337,11 @@
   (let ((arguments (phpactor--command-argments :source :offset :path)))
     (apply #'phpactor-action-dispatch (phpactor--rpc "goto_definition" arguments))))
 
+;;;###autoload
+(defun phpactor-context-menu ()
+  (interactive)
+  (let ((arguments (phpactor--command-argments :source :offset :current_path)))
+    (apply #'phpactor-action-dispatch (phpactor--rpc "context_menu" arguments))))
+
 (provide 'phpactor)
 ;;; phpactor.el ends here
